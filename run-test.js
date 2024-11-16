@@ -4,8 +4,8 @@ const AGENT_ID = process.env.AGENT_ID;
 const SCENARIO_IDS = process.env.SCENARIO_IDS;
 const TEST_AGENT_IDS = process.env.TEST_AGENT_IDS;
 const TIME_LIMIT = process.env.TIME_LIMIT || 10;
-const FIXA_BASE_URL = "https://www.fixa.dev";
-// const FIXA_BASE_URL = "http://localhost:3000";
+// const FIXA_BASE_URL = "https://www.fixa.dev";
+const FIXA_BASE_URL = "https://jpixa.ngrok.dev";
 
 // Validate required environment variables
 if (!FIXA_API_KEY || !AGENT_ID) {
