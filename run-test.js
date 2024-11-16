@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 // Get environment variables
 const FIXA_API_KEY = process.env.FIXA_API_KEY;
 const AGENT_ID = process.env.AGENT_ID;
@@ -7,6 +5,7 @@ const SCENARIO_IDS = process.env.SCENARIO_IDS;
 const TEST_AGENT_IDS = process.env.TEST_AGENT_IDS;
 const TIME_LIMIT = process.env.TIME_LIMIT || 10;
 const FIXA_BASE_URL = "https://www.fixa.dev";
+// const FIXA_BASE_URL = "http://localhost:3000";
 
 // Validate required environment variables
 if (!FIXA_API_KEY || !AGENT_ID) {
@@ -16,7 +15,7 @@ if (!FIXA_API_KEY || !AGENT_ID) {
 
 function printTestUrl(testId) {
   console.log(
-    `view test at: ${FIXA_BASE_URL}/dashboard/${AGENT_ID}/tests/${testId}`
+    `[${new Date().toISOString()}] view test at: ${FIXA_BASE_URL}/dashboard/${AGENT_ID}/tests/${testId}`
   );
 }
 
@@ -37,7 +36,9 @@ async function getTestStatus(testId) {
 function printCalls(calls) {
   calls.forEach((call) => {
     console.log(
-      `- call_id: ${call.id}, status: ${call.status}, result: ${call.result}`
+      `[${new Date().toISOString()}] - call_id: ${call.id}, status: ${
+        call.status
+      }, result: ${call.result}`
     );
   });
 }
@@ -48,25 +49,29 @@ async function pollTestStatus(testId) {
 
   while (true) {
     if (Date.now() - startTime > TIMEOUT) {
-      console.log(`test timed out after ${TIME_LIMIT} minutes`);
+      console.log(
+        `[${new Date().toISOString()}] test timed out after ${TIME_LIMIT} minutes`
+      );
       process.exit(1);
     }
 
-    const status = await getTestStatus(testId);
-    console.log(`current test status: ${status.data.status}`);
+    const data = await getTestStatus(testId);
+    console.log(
+      `[${new Date().toISOString()}] current test status: ${data.status}`
+    );
 
-    if (status.data.calls) {
-      printCalls(status.data.calls);
+    if (data.calls) {
+      printCalls(data.calls);
     }
 
-    if (status.data.calls.some((call) => call.status === "failed")) {
-      console.log("some tests failed!");
+    if (data.calls.some((call) => call.result === "failure")) {
+      console.log(`[${new Date().toISOString()}] some tests failed!`);
       printTestUrl(testId);
       process.exit(1);
     }
 
-    if (status.data.status === "is_completed") {
-      console.log("all tests passed!");
+    if (data.status === "completed") {
+      console.log(`[${new Date().toISOString()}] all tests passed!`);
       printTestUrl(testId);
       break;
     }
@@ -102,13 +107,15 @@ async function runTest() {
     const data = await response.json();
 
     const testId = data.data.testId;
-    console.log(`test run started with id: ${testId}`);
+    console.log(
+      `[${new Date().toISOString()}] test run started with id: ${testId}`
+    );
     printTestUrl(testId);
 
     // Add polling for test status
     await pollTestStatus(testId);
   } catch (error) {
-    console.error("error running test:", error);
+    console.error(`[${new Date().toISOString()}] error running test:`, error);
     process.exit(1);
   }
 }
