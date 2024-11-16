@@ -1,0 +1,46 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  workflow_call:
+    inputs:
+      agent_id:
+        required: true
+        type: string
+        description: The agent ID
+      scenario_ids:
+        required: true
+        type: string
+        description: The scenario IDs
+      test_agent_ids:
+        required: true
+        type: string
+        description: The test agent IDs
+    secrets:
+      FIXA_API_KEY:
+        required: true
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fixa-ci repository
+        uses: actions/checkout@v4
+        with:
+          repository: fixadev/fixa-ci
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: node run-test.js
+        env:
+          FIXA_API_KEY: ${{ secrets.FIXA_API_KEY }}
+          AGENT_ID: ${{ inputs.agent_id }}
+          SCENARIO_IDS: ${{ inputs.scenario_ids }}
+          TEST_AGENT_IDS: ${{ inputs.test_agent_ids }}
