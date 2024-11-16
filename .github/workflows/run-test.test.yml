@@ -1,0 +1,32 @@
+name: Test Run Test Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      agent_id:
+        description: "Agent ID to test"
+        required: true
+        type: string
+      scenario_ids:
+        description: "Scenario IDs (comma-separated)"
+        required: false
+        type: string
+      test_agent_ids:
+        description: "Test Agent IDs (comma-separated)"
+        required: false
+        type: string
+      time_limit:
+        description: "Time limit in minutes"
+        required: false
+        type: number
+        default: 10
+
+jobs:
+  call-test-workflow:
+    uses: ./.github/workflows/run-test.yml
+    secrets: inherit
+    with:
+      agent_id: ${{ inputs.agent_id }}
+      scenario_ids: ${{ inputs.scenario_ids }}
+      test_agent_ids: ${{ inputs.test_agent_ids }}
+      time_limit: ${{ inputs.time_limit }}
