@@ -24,9 +24,9 @@ on:
 jobs:
   call-test-workflow:
     uses: ./.github/workflows/run-test.yml
-    secrets: inherit
     with:
       agent_id: ${{ inputs.agent_id }}
       scenario_ids: ${{ inputs.scenario_ids }}
       test_agent_ids: ${{ inputs.test_agent_ids }}
       time_limit: ${{ inputs.time_limit }}
+    secrets: inherit
