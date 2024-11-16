@@ -9,15 +9,16 @@ on:
       agent_id:
         required: true
         type: string
-        description: The agent ID
+        description: The agent ID of the agent to run the test on
       scenario_ids:
-        required: true
         type: string
-        description: The scenario IDs
+        description: The scenario IDs to run the test on, separated by commas. Don't provide this if you want to run the test on all scenarios.
       test_agent_ids:
-        required: true
         type: string
-        description: The test agent IDs
+        description: The test agent IDs to run the test on, separated by commas. Don't provide this if you want to run the test with all test agents.
+      time_limit:
+        type: number
+        description: The time limit for the test in minutes. Defaults to 10 minutes.
     secrets:
       FIXA_API_KEY:
         required: true
@@ -33,7 +34,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "20.x"
           cache: "npm"
       - name: Install dependencies
         run: npm ci
@@ -44,3 +45,4 @@ jobs:
           AGENT_ID: ${{ inputs.agent_id }}
           SCENARIO_IDS: ${{ inputs.scenario_ids }}
           TEST_AGENT_IDS: ${{ inputs.test_agent_ids }}
+          TIME_LIMIT: ${{ inputs.time_limit }}
