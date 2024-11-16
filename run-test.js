@@ -3,7 +3,7 @@ const FIXA_API_KEY = process.env.FIXA_API_KEY;
 const AGENT_ID = process.env.AGENT_ID;
 const SCENARIO_IDS = process.env.SCENARIO_IDS;
 const TEST_AGENT_IDS = process.env.TEST_AGENT_IDS;
-const TIME_LIMIT = process.env.TIME_LIMIT || 10;
+const TIME_LIMIT = process.env.TIME_LIMIT;
 // const FIXA_BASE_URL = "https://www.fixa.dev";
 const FIXA_BASE_URL = "https://jpixa.ngrok.dev";
 

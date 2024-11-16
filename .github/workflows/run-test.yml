@@ -16,6 +16,7 @@ on:
       time_limit:
         type: number
         description: The time limit for the test in minutes. Defaults to 10 minutes.
+        default: 10
     secrets:
       FIXA_API_KEY:
         required: true
