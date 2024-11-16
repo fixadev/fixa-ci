@@ -121,10 +121,3 @@ async function runTest() {
 }
 
 runTest();
-
-/*
-export FIXA_API_KEY=""
-export AGENT_ID="your-agent-id"
-export SCENARIO_IDS="id1,id2,id3"
-export TEST_AGENT_IDS="test1,test2,test3"
-*/
