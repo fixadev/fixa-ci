@@ -6,7 +6,7 @@ const TEST_AGENT_IDS = process.env.TEST_AGENT_IDS;
 const TIME_LIMIT = process.env.TIME_LIMIT
   ? parseInt(process.env.TIME_LIMIT)
   : 10;
-const FIXA_BASE_URL = "https://jpixa.ngrok.dev";
+const FIXA_BASE_URL = "https://www.fixa.dev";
 
 // Validate required environment variables
 if (!FIXA_API_KEY || !AGENT_ID) {
@@ -78,7 +78,7 @@ async function pollTestStatus(testId) {
     }
 
     if (data.status === "completed") {
-      console.log(`[${new Date().toISOString()}] all tests passed!`);
+      console.log(`[${new Date().toISOString()}] test passed!`);
       printTestUrl(testId);
       break;
     }
