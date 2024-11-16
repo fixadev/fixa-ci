@@ -15,11 +15,6 @@ on:
         description: "Test Agent IDs (comma-separated)"
         required: false
         type: string
-      time_limit:
-        description: "Time limit in minutes"
-        required: false
-        type: number
-        default: 10
 
 jobs:
   call-test-workflow:
@@ -28,5 +23,4 @@ jobs:
       agent_id: ${{ inputs.agent_id }}
       scenario_ids: ${{ inputs.scenario_ids }}
       test_agent_ids: ${{ inputs.test_agent_ids }}
-      time_limit: ${{ inputs.time_limit }}
     secrets: inherit
