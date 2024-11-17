@@ -49,7 +49,10 @@ function printCalls(calls) {
     console.log(
       `[${new Date().toISOString()}] - call_id: ${call.id}, status: ${
         call.status
-      }, result: ${didCallSucceed(call) ? "success" : "failure"}`
+      }` +
+        (call.status === "completed"
+          ? `, result: ${didCallSucceed(call) ? "success" : "failure"}`
+          : "")
     );
   });
 }
