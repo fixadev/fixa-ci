@@ -20,6 +20,10 @@ if (isNaN(TIME_LIMIT) || TIME_LIMIT <= 0) {
   process.exit(1);
 }
 
+function didCallSucceed(call) {
+  return call.evalResults.every((result) => result.success);
+}
+
 function printTestUrl(testId) {
   console.log(
     `[${new Date().toISOString()}] view test at: ${FIXA_BASE_URL}/dashboard/${AGENT_ID}/tests/${testId}`
@@ -45,7 +49,7 @@ function printCalls(calls) {
     console.log(
       `[${new Date().toISOString()}] - call_id: ${call.id}, status: ${
         call.status
-      }, result: ${call.result}`
+      }, result: ${didCallSucceed(call) ? "success" : "failure"}`
     );
   });
 }
@@ -71,7 +75,7 @@ async function pollTestStatus(testId) {
       printCalls(data.calls);
     }
 
-    if (data.calls.some((call) => call.result === "failure")) {
+    if (data.calls.some((call) => !didCallSucceed(call))) {
       console.error(`[${new Date().toISOString()}] some tests failed!`);
       printTestUrl(testId);
       process.exit(1);
