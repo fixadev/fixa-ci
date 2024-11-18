@@ -7,6 +7,7 @@ const TIME_LIMIT = process.env.TIME_LIMIT
   ? parseInt(process.env.TIME_LIMIT)
   : 10;
 const FIXA_BASE_URL = "https://www.fixa.dev";
+const FIXA_API_BASE_URL = "https://www.fixa.dev/api/v1";
 
 // Validate required environment variables
 if (!FIXA_API_KEY || !AGENT_ID) {
@@ -27,7 +28,7 @@ function printTestUrl(testId) {
 }
 
 async function getTestStatus(testId) {
-  const response = await fetch(`${FIXA_BASE_URL}/api/tests/${testId}/status`, {
+  const response = await fetch(`${FIXA_API_BASE_URL}/tests/${testId}/status`, {
     headers: {
       Authorization: `Bearer ${FIXA_API_KEY}`,
     },
@@ -102,7 +103,7 @@ async function runTest() {
     if (TEST_AGENT_IDS) {
       body.testAgentIds = TEST_AGENT_IDS.split(",").map((id) => id.trim());
     }
-    const response = await fetch(`${FIXA_BASE_URL}/api/tests`, {
+    const response = await fetch(`${FIXA_API_BASE_URL}/tests`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
