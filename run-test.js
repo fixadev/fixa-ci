@@ -8,6 +8,7 @@ const TIME_LIMIT = process.env.TIME_LIMIT
   : 10;
 const FIXA_BASE_URL = "https://www.fixa.dev";
 const FIXA_API_BASE_URL = "https://www.fixa.dev/api/v1";
+// const FIXA_API_BASE_URL = "http://localhost:3000/api/v1";
 
 // Validate required environment variables
 if (!FIXA_API_KEY || !AGENT_ID) {
@@ -118,7 +119,7 @@ async function runTest() {
 
     const data = await response.json();
 
-    const testId = data.data.testId;
+    const testId = data.testId;
     console.log(
       `[${new Date().toISOString()}] test run started with id: ${testId}`
     );
