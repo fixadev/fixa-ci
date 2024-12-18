@@ -7,7 +7,7 @@ const TIME_LIMIT = process.env.TIME_LIMIT
   ? parseInt(process.env.TIME_LIMIT)
   : 10;
 const FIXA_BASE_URL = "https://www.fixa.dev";
-const FIXA_API_BASE_URL = "https://www.fixa.dev/api/v1";
+const FIXA_API_BASE_URL = "https://www.api.fixa.dev/v1";
 // const FIXA_API_BASE_URL = "http://localhost:3000/api/v1";
 
 // Validate required environment variables
