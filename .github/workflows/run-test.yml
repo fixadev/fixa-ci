@@ -10,7 +10,7 @@ on:
       scenario_ids:
         type: string
         description: The scenario IDs to run the test on, separated by commas. Don't provide this if you want to run the test on all scenarios.
-      test_agent_ids:
+      persona_ids:
         type: string
         description: The test agent IDs to run the test on, separated by commas. Don't provide this if you want to run the test with all test agents.
       time_limit:
@@ -42,5 +42,5 @@ jobs:
           FIXA_API_KEY: ${{ secrets.FIXA_API_KEY }}
           AGENT_ID: ${{ inputs.agent_id }}
           SCENARIO_IDS: ${{ inputs.scenario_ids }}
-          TEST_AGENT_IDS: ${{ inputs.test_agent_ids }}
+          PERSONA_IDS: ${{ inputs.persona_ids }}
           TIME_LIMIT: ${{ inputs.time_limit }}

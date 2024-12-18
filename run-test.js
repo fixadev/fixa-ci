@@ -2,7 +2,7 @@
 const FIXA_API_KEY = process.env.FIXA_API_KEY;
 const AGENT_ID = process.env.AGENT_ID;
 const SCENARIO_IDS = process.env.SCENARIO_IDS;
-const TEST_AGENT_IDS = process.env.TEST_AGENT_IDS;
+const PERSONA_IDS = process.env.PERSONA_IDS;
 const TIME_LIMIT = process.env.TIME_LIMIT
   ? parseInt(process.env.TIME_LIMIT)
   : 10;
@@ -101,8 +101,8 @@ async function runTest() {
     if (SCENARIO_IDS) {
       body.scenarioIds = SCENARIO_IDS.split(",").map((id) => id.trim());
     }
-    if (TEST_AGENT_IDS) {
-      body.testAgentIds = TEST_AGENT_IDS.split(",").map((id) => id.trim());
+    if (PERSONA_IDS) {
+      body.personaIds = PERSONA_IDS.split(",").map((id) => id.trim());
     }
     const response = await fetch(`${FIXA_API_BASE_URL}/tests`, {
       method: "POST",

@@ -11,7 +11,7 @@ on:
         description: "Scenario IDs (comma-separated)"
         required: false
         type: string
-      test_agent_ids:
+      persona_ids:
         description: "Test Agent IDs (comma-separated)"
         required: false
         type: string
@@ -22,5 +22,5 @@ jobs:
     with:
       agent_id: ${{ inputs.agent_id }}
       scenario_ids: ${{ inputs.scenario_ids }}
-      test_agent_ids: ${{ inputs.test_agent_ids }}
+      persona_ids: ${{ inputs.persona_ids }}
     secrets: inherit
