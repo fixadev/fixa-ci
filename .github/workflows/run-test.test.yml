@@ -12,7 +12,7 @@ on:
         required: false
         type: string
       persona_ids:
-        description: "Test Agent IDs (comma-separated)"
+        description: "Persona IDs (comma-separated)"
         required: false
         type: string
 

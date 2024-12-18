@@ -12,7 +12,7 @@ on:
         description: The scenario IDs to run the test on, separated by commas. Don't provide this if you want to run the test on all scenarios.
       persona_ids:
         type: string
-        description: The test agent IDs to run the test on, separated by commas. Don't provide this if you want to run the test with all test agents.
+        description: The persona IDs to run the test on, separated by commas. Don't provide this if you want to run the test with all personas.
       time_limit:
         type: number
         description: The time limit for the test in minutes. Defaults to 10 minutes.
